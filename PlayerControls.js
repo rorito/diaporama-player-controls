@@ -204,7 +204,12 @@ class PlayerControls extends Component {
   onProgressClick (e) {
     e.preventDefault();
     const { diaporama } = this.props;
-    const rect = e.target.getBoundingClientRect();
+    var elementClicked = e.target;
+    if (elementClicked.tagName !== "A") {
+      // Sometimes target is the <i> tag, so we move to the parent <a> element
+      elementClicked = elementClicked.parentElement;
+    }
+    const rect = elementClicked.getBoundingClientRect();
     diaporama.currentTime = diaporama.duration * lerp(rect.left, rect.right, e.clientX);
   }
 
