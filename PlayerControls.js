@@ -38,9 +38,8 @@ class Button extends Component {
     } = this.state;
 
     const style = {
-      color: active ? "#ce7" : "#999",
-      opacity: hover ? 1 : 0.6,
-      fontSize: "24px",
+      color: active ? "#f1595a" : "#f1595a",
+      fontSize: "22px",
       textDecoration: "none",
       padding: "0px 4px",
       verticalAlign: "top",
@@ -76,22 +75,22 @@ const defaultProps = {
   styles: {
     style: {
       position: "relative",
-      background: "#222",
-      borderTop: "1px solid #222"
+      background: "#6dc7b6",
+      opacity: 0.9,
+      borderTop: "1px solid #6dc7b6"
     },
     progressContainer: {
       position: "relative",
-      background: "#000",
+      background: "#6dc7b6",
       cursor: "pointer",
       display: "block"
     },
     progress: {
-      zIndex: 2,
       position: "absolute",
       top: 0,
       left: 0,
       height: "100%",
-      background: "#ce7",
+      background: "#f1595a",
       pointerEvents: "none"
     },
     buffered: {
@@ -100,30 +99,31 @@ const defaultProps = {
       top: 0,
       left: 0,
       height: "100%",
-      background: "#ce7",
+      background: "#ba2429",
       opacity: 0.3,
       pointerEvents: "none"
     },
     progressTime: {
-      color: "#ce7",
+      color: "#fff",
       fontWeight: "bold"
     },
     progressDuration: {
       paddingLeft: "4px",
-      color: "#aaa"
+      color: "#fff"
     },
     progressSlide: {
       color: "#fff",
       fontWeight: "bold",
-      display: "inline-block",
-      minWidth: "20px",
-      textAlign: "right"
+      paddingLeft: "4px",
+      paddingRight: "4px",
+      display: "inline-block"
     },
     progressSlides: {
       paddingLeft: "4px",
-      color: "#aaa",
-      display: "inline-block",
-      minWidth: "20px"
+      color: "#fff",
+      paddingLeft: "4px",
+      paddingRight: "4px",
+      display: "inline-block"
     },
     textButton: {
       textTransform: "uppercase",
@@ -132,7 +132,7 @@ const defaultProps = {
     },
     loading: {
       position: "absolute",
-      color: "#ce7"
+      color: "#f1595a"
     },
     playbackRate: {
       color: "#999",
@@ -263,9 +263,9 @@ class PlayerControls extends Component {
     return <div style={styles.style}>
       {!disableProgress &&
       <a style={progressContainer} onClick={this.onProgressClick}>
-        <div style={progress}></div>
+        {/*<i style={loading} className={loadingIcons[currentRenderState]}></i>*/}
         <div style={buffered}></div>
-        <i style={loading} className={loadingIcons[currentRenderState]}></i>
+        <div style={progress}></div>
       </a>
       }
       <div style={styles.buttons}>
@@ -276,14 +276,16 @@ class PlayerControls extends Component {
         }
         {!disableTime &&
         <div style={styles.buttonsSection}>
-          <span style={styles.progressTime}>{this.formatDuration(currentTime)}</span> /
+          <span style={styles.progressTime}>{this.formatDuration(currentTime)}</span>
+          <span style={styles.progressDuration}>/</span>
           <span style={styles.progressDuration}>{this.formatDuration(duration)}</span>
         </div>
         }
         {!disableSlide &&
         <div style={styles.buttonsSection}>
           <Button onClick={() => diaporama.prev()} icon="step-backward" />
-          <span style={styles.progressSlide}>{slide+1}</span> /
+          <span style={styles.progressSlide}>{slide+1}</span>
+          <span style={styles.progressSlides}>/</span>
           <span style={styles.progressSlides}>{slides}</span>
           <Button onClick={() => diaporama.next()} icon="step-forward" />
         </div>
